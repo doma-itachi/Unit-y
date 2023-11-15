@@ -22,4 +22,12 @@ export default class Components{
         }
         return result;
     }
+    public destroyComponent<T extends UnitBehaviour>(componentType: new()=>T){
+        for(let i=0;i<this.componentList.length;i++){
+            if(this.componentList[i] instanceof componentType){
+                this.componentList.splice(i, 1);
+                return;
+            }
+        }
+    }
 }

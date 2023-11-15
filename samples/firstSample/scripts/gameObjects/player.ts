@@ -9,9 +9,9 @@ export default class Player extends UnitLib.GameObject{
     constructor(){
         super();
 
-        this.components.addComponents(new TextRenderer());
-        this.components.addComponents(new KeyTest());
-        let textComponent=this.components.getComponents(TextRenderer);
+        this.components.addComponent(new TextRenderer());
+        this.components.addComponent(new KeyTest());
+        let textComponent=this.components.getComponent(TextRenderer);
         if(textComponent){
             textComponent.text="Hello World!";
         }
