@@ -12,7 +12,6 @@ export default class BackgroundController extends UnitBehaviour{
             context.transform.localScale.set(
                 context.screen.height/asset.height
             )
-
         }catch{};
     }
 }

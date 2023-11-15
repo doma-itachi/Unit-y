@@ -14,6 +14,7 @@ export default class FlappyBird extends Scene{
         this.assetManager.regist("pipeBottom", require("../assets/sprites/pipe_bottom.png"));
         this.assetManager.regist("bird", require("../assets/sprites/bird1.png"));
         this.assetManager.regist("gameover", require("../assets/sprites/gameover.png"));
+        this.assetManager.regist("logo", require("../assets/sprites/flappy_logo.png"));
 
         this.instantiate(new Background());
         this.instantiate(new GroundGameObject());

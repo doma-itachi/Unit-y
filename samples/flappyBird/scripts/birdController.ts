@@ -10,6 +10,9 @@ export default class BirdController extends UnitBehaviour{
     private isPushedSpace=false;//スペース長押しを防ぐ
     public isHit=false;
     public isGameStart=false;
+    public time=0;
+    public timeFromGameOver=0;
+    private retryFlag=false;
 
     public start(context: IUnitLibComponents) {
         throw new Error("Method not implemented.");
@@ -23,10 +26,20 @@ export default class BirdController extends UnitBehaviour{
                 this.isGameStart=true;
             }
 
-            //ゲームオーバーからのリトライ
-            if(this.isHit && context.input.getKey("Space")){
-                context.sceneManager.loadScene(new FlappyBird());
+            //ゲーム開始前の鳥アニメーション
+            if(!this.isGameStart){
+                this.time+=context.time.deltaTime;
+                context.transform.position.y+=Math.sin(this.time*10)*3
             }
+
+            //キーのご反応を防ぐ
+            if(this.isHit)this.timeFromGameOver+=context.time.deltaTime;
+
+            //ゲームオーバーからのリトライ
+            if(this.isHit && context.input.getKey("Space") && !this.retryFlag && this.timeFromGameOver>3){
+                this.retryFlag=true;
+            }
+            if(this.retryFlag && !context.input.getKey("Space"))context.sceneManager.loadScene(new FlappyBird());
 
             if(this.isGameStart){
 
@@ -48,6 +61,7 @@ export default class BirdController extends UnitBehaviour{
                 if(context.transform.position.y>ground.transform.position.y-ren.actualHeight){
                     context.transform.position.y=ground.transform.position.y-ren.actualHeight;
                     this.velocity=0;
+                    this.isHit=true;
                 }
             }
             

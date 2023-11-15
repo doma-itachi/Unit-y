@@ -8,7 +8,7 @@ export default class BirdGameObject extends GameObject{
     public tag: string="player";
     constructor(){
         super();
-        this.transform.position.set(300, 300);
+        this.transform.position.set(500, 300);
 
         this.components.addComponent(new ImageRenderer("bird"));
         this.components.addComponent(new BoxCollider());

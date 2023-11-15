@@ -1,7 +1,8 @@
 import { Webview } from "https://deno.land/x/webview/mod.ts";
 const port=1234;
-declare class Deno{
-    public run(obj: any): any;
+
+declare global{
+    const Deno: any;
 }
 const parcel=Deno.run({cmd:["cmd", "/c", "parcel", "./index.html"]});
 
